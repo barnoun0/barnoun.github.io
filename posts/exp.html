@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>docs.log — understanding VLANs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0d0d0f;
+      --surface:  #131316;
+      --border:   #2a2a32;
+      --text:     #e8e8f0;
+      --muted:    #6e6e82;
+      --accent:   #7c6af7;
+      --mono:     'JetBrains Mono', monospace;
+      --sans:     'Inter', sans-serif;
+    }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); }
+    header { border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 10; }
+    .header-inner { max-width: 860px; margin: 0 auto; padding: 0 2rem; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-box { width: 28px; height: 28px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 13px; font-weight: 600; color: #fff; }
+    .logo-name { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; }
+    .logo-name span { color: var(--accent); }
+    nav a { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 5px 12px; border-radius: 6px; }
+    .container { max-width: 860px; margin: 0 auto; padding: 2rem 2rem 5rem; }
+    .post-meta { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .post-date { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    h1 { font-family: var(--mono); font-size: 36px; margin: 1rem 0 1rem; letter-spacing: -0.5px; }
+    .content { font-size: 15px; line-height: 1.7; color: #ddd; }
+    .content h2 { font-family: var(--mono); font-size: 22px; margin: 2rem 0 1rem; color: var(--accent); }
+    .content h3 { font-size: 18px; margin: 1.5rem 0 0.75rem; }
+    .content p { margin-bottom: 1rem; }
+    .content code { background: #1a1a1f; padding: 2px 6px; border-radius: 4px; font-family: var(--mono); font-size: 13px; }
+    .content pre { background: #0a0a0c; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--border); }
+    .back-link { display: inline-block; margin-top: 3rem; color: var(--accent); text-decoration: none; font-size: 13px; }
+    footer { max-width: 860px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="../index.html">
+      <div class="logo-box">#</div>
+      <span class="logo-name">docs<span>.</span>log</span>
+    </a>
+    <nav><a href="../index.html">← back</a></nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="post-meta">
+    <div class="post-date">2025-05-07 · 7 min read</div>
+    <h1>Understanding VLANs: a practical overview</h1>
+  </div>
+
+  <div class="content">
+    <p>VLANs (Virtual LANs) are one of those networking topics that sound abstract until you actually <strong>need</strong> them. This post is my raw notes — what I wish someone told me before I started slicing broadcast domains.</p>
+
+    <h2>What problem do VLANs solve?</h2>
+    <p>A flat L2 network has two major issues: <strong>broadcast storms</strong> and <strong>security</strong>. If one device sends a broadcast, every device sees it. VLANs allow you to split a physical switch into multiple isolated logical switches.</p>
+
+    <h2>VLAN tagging (802.1Q)</h2>
+    <p>When a frame travels between switches, it needs a tag (4-byte header) to know which VLAN it belongs to. The most common:</p>
+    <pre><code>VLAN 1   - default (avoid using)
+VLAN 10  - engineering
+VLAN 20  - HR
+VLAN 99  - native (untagged)</code></pre>
+
+    <h3>Access vs. Trunk ports</h3>
+    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+      <li><strong>Access port</strong> — belongs to exactly one VLAN (e.g., a PC)</li>
+      <li><strong>Trunk port</strong> — carries multiple VLANs (switch-to-switch)</li>
+    </ul>
+
+    <h2>Real-world config (Cisco-style)</h2>
+    <pre><code>interface GigabitEthernet0/1
+ switchport mode access
+ switchport access vlan 10
+
+interface GigabitEthernet0/24
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,99</code></pre>
+
+    <h2>Why I use VLANs in my homelab</h2>
+    <p>- Separate IoT devices (untrusted)<br>
+    - Management VLAN for switches & iLO/iDRAC<br>
+    - Guest WiFi isolation</p>
+
+    <p><strong>Takeaway:</strong> VLANs are not encryption — they're convenience + isolation. Use ACLs or firewalls for real segmentation.</p>
+  </div>
+
+  <a class="back-link" href="../index.html">← all posts</a>
+</div>
+
+<footer>
+  <span class="footer-txt">built with github pages</span>
+</footer>
+
+</body>
+</html>
