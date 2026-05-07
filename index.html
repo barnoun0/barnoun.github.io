@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>barnoun</title>
-    <link rel="icon" type="favicon.ico" href="favicon.ico">
+  <link rel="icon" type="favicon.ico" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <style>
@@ -21,6 +21,10 @@
       --green:    #3dd68c;
       --amber:    #f5a623;
       --blue:     #4d9cff;
+      --purple:   #c084fc;
+      --pink:     #f472b6;
+      --cyan:     #06b6d4;
+      --red:      #ef4444;
       --mono:     'JetBrains Mono', monospace;
       --sans:     'Inter', sans-serif;
     }
@@ -64,10 +68,16 @@
     .post-title { font-size: 14px; font-weight: 500; color: var(--text); transition: color .15s; }
     .post-right { display: flex; align-items: center; gap: 10px; }
     .post-tag { font-family: var(--mono); font-size: 10px; font-weight: 500; padding: 3px 10px; border-radius: 4px; letter-spacing: .3px; }
-    .t-net { background: rgba(77,156,255,.12); color: var(--blue); }
-    .t-lnx { background: rgba(61,214,140,.12); color: var(--green); }
-    .t-dev { background: rgba(124,106,247,.12); color: var(--accent); }
-    .t-oth { background: rgba(245,166,35,.12); color: var(--amber); }
+
+    /* 🎨 CATEGORY COLORS - Each one unique */
+    .t-net { background: rgba(77, 156, 255, 0.15); color: #4d9cff; }      /* Networking - Bright Blue */
+    .t-lnx { background: rgba(61, 214, 140, 0.15); color: #3dd68c; }      /* Linux - Mint Green */
+    .t-dev { background: rgba(124, 106, 247, 0.15); color: #7c6af7; }      /* Dev - Purple */
+    .t-rob { background: rgba(245, 166, 35, 0.15); color: #f5a623; }       /* Robotics - Amber/Orange */
+    .t-oth { background: rgba(236, 72, 153, 0.15); color: #f472b6; }       /* Other - Pink */
+    .t-emb { background: rgba(6, 182, 212, 0.15); color: #06b6d4; }        /* Embedded - Cyan */
+    .t-sec { background: rgba(239, 68, 68, 0.15); color: #ef4444; }        /* Security - Red */
+
     .arrow { font-size: 14px; color: var(--muted); opacity: 0; transform: translateX(-5px); transition: all .15s; }
     .post-item[hidden] { display: none; }
 
@@ -95,9 +105,9 @@
   <div class="eyebrow">personal knowledge base</div>
   <h1>Notes on <em>systems</em>,<br>networks &amp; code.</h1>
   <p>Raw documentation, guides, and write-ups on things I've built, broken, and learned.</p>
-    <div class="hero-stats">
-    <div><div class="stat-num" id="total-count">3</div><div class="stat-label">total posts</div></div>
-    <div><div class="stat-num">4</div><div class="stat-label">topics</div></div>
+  <div class="hero-stats">
+    <div><div class="stat-num" id="total-count">4</div><div class="stat-label">total posts</div></div>
+    <div><div class="stat-num">5</div><div class="stat-label">topics</div></div>
   </div>
 </section>
 
@@ -106,6 +116,7 @@
   <button class="tag-btn" data-filter="networking">networking</button>
   <button class="tag-btn" data-filter="linux">linux</button>
   <button class="tag-btn" data-filter="dev">dev</button>
+  <button class="tag-btn" data-filter="robotics">robotics</button>
   <button class="tag-btn" data-filter="other">other</button>
 </div>
 
@@ -113,13 +124,19 @@
 
 <main class="posts" id="post-list">
 
-  <a class="post-item" href="posts/exp.html" data-tag="linux">
+  <!-- 🦾 MAZE ROBOT POST -->
+  <a class="post-item" href="posts/maze-robot.html" data-tag="robotics">
     <span class="post-date">2025-05-07</span>
-    <span class="post-title">This is an example</span>
-    <span class="post-right"><span class="post-tag t-net">linux</span><span class="arrow">→</span></span>
+    <span class="post-title">Maze-Solving Robot — MPU6050 + PID Control</span>
+    <span class="post-right"><span class="post-tag t-rob">robotics</span><span class="arrow">→</span></span>
   </a>
 
-
+  <!-- 🐧 EXAMPLE LINUX POST -->
+  <a class="post-item" href="posts/exp.html" data-tag="linux">
+    <span class="post-date">2025-05-07</span>
+    <span class="post-title">This is an example (Linux setup)</span>
+    <span class="post-right"><span class="post-tag t-lnx">linux</span><span class="arrow">→</span></span>
+  </a>
 
 </main>
 
@@ -133,17 +150,28 @@
   const items = document.querySelectorAll('.post-item');
   const label = document.getElementById('filter-label');
   const count = document.getElementById('total-count');
+  
+  function updateCount() {
+    let v = 0;
+    items.forEach(i => { if (!i.hidden) v++; });
+    count.textContent = v;
+  }
+  
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const f = btn.dataset.filter;
       label.textContent = f === 'all' ? 'all posts' : f;
-      let v = 0;
-      items.forEach(i => { const hide = f !== 'all' && i.dataset.tag !== f; i.hidden = hide; if (!hide) v++; });
-      count.textContent = v;
+      items.forEach(i => { 
+        const hide = f !== 'all' && i.dataset.tag !== f; 
+        i.hidden = hide; 
+      });
+      updateCount();
     });
   });
+  
+  updateCount();
 </script>
 </body>
 </html>
