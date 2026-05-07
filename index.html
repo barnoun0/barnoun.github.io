@@ -25,6 +25,7 @@
       --pink:     #f472b6;
       --cyan:     #06b6d4;
       --red:      #ef4444;
+      --teal:     #14b8a6;
       --mono:     'JetBrains Mono', monospace;
       --sans:     'Inter', sans-serif;
     }
@@ -72,11 +73,12 @@
     /* 🎨 CATEGORY COLORS - Each one unique */
     .t-net { background: rgba(77, 156, 255, 0.15); color: #4d9cff; }      /* Networking - Bright Blue */
     .t-lnx { background: rgba(61, 214, 140, 0.15); color: #3dd68c; }      /* Linux - Mint Green */
-    .t-dev { background: rgba(124, 106, 247, 0.15); color: #7c6af7; }      /* Dev - Purple */
-    .t-rob { background: rgba(245, 166, 35, 0.15); color: #f5a623; }       /* Robotics - Amber/Orange */
-    .t-oth { background: rgba(236, 72, 153, 0.15); color: #f472b6; }       /* Other - Pink */
-    .t-emb { background: rgba(6, 182, 212, 0.15); color: #06b6d4; }        /* Embedded - Cyan */
-    .t-sec { background: rgba(239, 68, 68, 0.15); color: #ef4444; }        /* Security - Red */
+    .t-dev { background: rgba(124, 106, 247, 0.15); color: #7c6af7; }     /* Dev - Purple */
+    .t-rob { background: rgba(245, 166, 35, 0.15); color: #f5a623; }      /* Robotics - Amber/Orange */
+    .t-gde { background: rgba(20, 184, 166, 0.15); color: #14b8a6; }      /* Guide - Teal (NEW COLOR) */
+    .t-emb { background: rgba(6, 182, 212, 0.15); color: #06b6d4; }       /* Embedded - Cyan */
+    .t-sec { background: rgba(239, 68, 68, 0.15); color: #ef4444; }       /* Security - Red */
+    .t-oth { background: rgba(236, 72, 153, 0.15); color: #f472b6; }      /* Other - Pink */
 
     .arrow { font-size: 14px; color: var(--muted); opacity: 0; transform: translateX(-5px); transition: all .15s; }
     .post-item[hidden] { display: none; }
@@ -107,7 +109,7 @@
   <p>Raw documentation, guides, and write-ups on things I've built, broken, and learned.</p>
   <div class="hero-stats">
     <div><div class="stat-num" id="total-count">4</div><div class="stat-label">total posts</div></div>
-    <div><div class="stat-num">5</div><div class="stat-label">topics</div></div>
+    <div><div class="stat-num">7</div><div class="stat-label">topics</div></div>
   </div>
 </section>
 
@@ -117,7 +119,10 @@
   <button class="tag-btn" data-filter="linux">linux</button>
   <button class="tag-btn" data-filter="dev">dev</button>
   <button class="tag-btn" data-filter="robotics">robotics</button>
-  <button class="tag-btn" data-filter="other">Guide</button>
+  <button class="tag-btn" data-filter="guide">guide</button>
+  <button class="tag-btn" data-filter="embedded">embedded</button>
+  <button class="tag-btn" data-filter="security">security</button>
+  <button class="tag-btn" data-filter="other">other</button>
 </div>
 
 <div class="section-label">// <span id="filter-label">all posts</span></div>
@@ -126,15 +131,30 @@
 
   <!-- 🦾 MAZE ROBOT POST -->
   <a class="post-item" href="posts/hattab.html" data-tag="robotics">
-    <span class="post-date">2025-05-07</span>
+    <span class="post-date">2026-04-19</span>
     <span class="post-title">Maze-Solving Robot</span>
     <span class="post-right"><span class="post-tag t-rob">robotics</span><span class="arrow">→</span></span>
   </a>
-  
-  <a class="post-item" href="posts/orgmode.html" data-tag="Guide">
-    <span class="post-date">2026-04-19</span>
+
+  <!-- 📘 ORG MODE GUIDE POST -->
+  <a class="post-item" href="posts/orgmode.html" data-tag="guide">
+    <span class="post-date">2026-05-06</span>
     <span class="post-title">Org mode guide</span>
-    <span class="post-right"><span class="post-tag t-rob">Guide</span><span class="arrow">→</span></span>
+    <span class="post-right"><span class="post-tag t-gde">guide</span><span class="arrow">→</span></span>
+  </a>
+
+  <!-- 🔐 SECURITY POST (EXAMPLE - YOU CAN ADD REAL CONTENT) -->
+  <a class="post-item" href="posts/security.html" data-tag="security">
+    <span class="post-date">2026-05-01</span>
+    <span class="post-title">Security fundamentals (coming soon)</span>
+    <span class="post-right"><span class="post-tag t-sec">security</span><span class="arrow">→</span></span>
+  </a>
+
+  <!-- 📟 EMBEDDED POST (EXAMPLE - YOU CAN ADD REAL CONTENT) -->
+  <a class="post-item" href="posts/embedded.html" data-tag="embedded">
+    <span class="post-date">2026-04-25</span>
+    <span class="post-title">Embedded systems notes (coming soon)</span>
+    <span class="post-right"><span class="post-tag t-emb">embedded</span><span class="arrow">→</span></span>
   </a>
 
 </main>
