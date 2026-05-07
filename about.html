@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>docs.log — about</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0d0d0f;
+      --surface:  #131316;
+      --surface2: #1a1a1f;
+      --border:   #2a2a32;
+      --text:     #e8e8f0;
+      --muted:    #6e6e82;
+      --accent:   #7c6af7;
+      --mono:     'JetBrains Mono', monospace;
+      --sans:     'Inter', sans-serif;
+    }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; }
+    header { border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 10; }
+    .header-inner { max-width: 860px; margin: 0 auto; padding: 0 2rem; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-box { width: 28px; height: 28px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 13px; font-weight: 600; color: #fff; }
+    .logo-name { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; }
+    .logo-name span { color: var(--accent); }
+    nav { display: flex; gap: 4px; }
+    nav a { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 5px 12px; border-radius: 6px; transition: all .15s; }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .container { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .about-header { margin-bottom: 3rem; }
+    .eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--accent); display: inline-block; }
+    h1 { font-family: var(--mono); font-size: 32px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 1rem; }
+    .about-content { display: flex; flex-direction: column; gap: 2rem; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; }
+    .card h2 { font-family: var(--mono); font-size: 18px; margin-bottom: 1rem; color: var(--accent); }
+    .card p { font-size: 14px; line-height: 1.7; color: var(--text); margin-bottom: 1rem; }
+    .card p:last-child { margin-bottom: 0; }
+    ul { margin-left: 1.5rem; margin-top: 0.5rem; }
+    li { font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 0.5rem; }
+    .tech-badge { display: inline-block; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 2px 10px; font-family: var(--mono); font-size: 10px; margin-right: 6px; margin-top: 8px; }
+    footer { max-width: 860px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .footer-txt { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-box">#</div>
+      <span class="logo-name">docs<span>.</span>log</span>
+    </a>
+    <nav>
+      <a href="index.html">posts</a>
+      <a href="about.html">about</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="about-header">
+    <div class="eyebrow">about this site</div>
+    <h1>/about</h1>
+  </div>
+
+  <div class="about-content">
+    <div class="card">
+      <h2>📓 what is docs.log?</h2>
+      <p>This is my personal documentation hub — a raw, unfiltered archive of everything I learn about systems, networking, Linux, and software development. No SEO fluff, no ads, just notes that I wish I had when I started.</p>
+      <p>Everything here is written for <strong>future me</strong>, and maybe for you too.</p>
+    </div>
+
+    <div class="card">
+      <h2>🧑‍💻 who am i?</h2>
+      <p>I'm a systems engineer who loves breaking things to understand how they work. Over the years, I've collected hundreds of markdown notes, and I finally decided to put them online.</p>
+      <p>When I'm not debugging kernel panics or chasing packet drops, I write about infrastructure, automation, and the occasional coding rabbit hole.</p>
+      <div>
+        <span class="tech-badge">Linux</span>
+        <span class="tech-badge">Kubernetes</span>
+        <span class="tech-badge">C/C++</span>
+        <span class="tech-badge">Go</span>
+        <span class="tech-badge">TCP/IP</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📡 why github pages?</h2>
+      <p>Because it's free, it's built on Git (version control for writing), and it keeps me honest — once a post is published, I own it. No platform lock-in, just static files that will work forever.</p>
+      <p>This entire blog is plain HTML/CSS/JS. No build steps, no databases — just content.</p>
+    </div>
+
+    <div class="card">
+      <h2>✍️ want to reach out?</h2>
+      <p>Find me on GitHub as <code style="background: var(--surface2); padding: 2px 6px; border-radius: 4px;">your-username</code> (replace with yours) or open an issue on the repo for corrections/suggestions.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-txt">built with github pages</span>
+</footer>
+
+</body>
+</html>
